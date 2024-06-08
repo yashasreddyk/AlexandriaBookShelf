@@ -1,0 +1,11 @@
+/* src/components/Bookshelf.css */
+
+.bookshelf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.bookshelf .book-card {
+    margin: 10px;
+}

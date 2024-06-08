@@ -1,0 +1,28 @@
+/* src/components/BookCard.css */
+
+.book-card {
+    width:20rem;
+    height:10rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.book-card button {
+    border-radius:1rem;
+    background-color:#4CAF50;
+    color:black
+}
+
+.book-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.book-card p {
+    font-size: 14px;
+    margin: 10px 0;
+}

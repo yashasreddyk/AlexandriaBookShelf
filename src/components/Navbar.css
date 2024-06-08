@@ -1,0 +1,33 @@
+/* src/components/Navbar.css */
+
+.navbar {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+}
+
+.navbar a:hover {
+    background-color: #45a049;
+}
+
+.navbar a:link {
+  text-decoration: none;
+}
+
+.home-button {
+    margin-right: auto;
+}
+
+.bookshelf-button {
+    margin-left: auto;
+}
+
