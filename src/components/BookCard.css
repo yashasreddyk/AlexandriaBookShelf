@@ -12,9 +12,15 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .book-card button {
-    border-radius:1rem;
+    width:6rem;
+    height:3rem;
+    border-radius:0.5rem;
     background-color:#4CAF50;
-    color:black
+    color:snow;
+}
+
+.book-card button:hover {
+    background-color:#45a049;
 }
 
 .book-card h3 {

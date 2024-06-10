@@ -20,7 +20,7 @@ const HomePage = () => {
     return (
         <div>
             <Navbar />
-            <BookSearch onAddToBookshelf={handleAddToBookshelf} />
+            <BookSearch onAddToBookshelf={handleAddToBookshelf} bookshelf={bookshelf}/>
         </div>
     );
 };

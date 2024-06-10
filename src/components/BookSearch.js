@@ -1,9 +1,10 @@
+// src/components/BookSearch.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import BookCard from './BookCard';
 import './BookSearch.css';
 
-const BookSearch = ({ onAddToBookshelf }) => {
+const BookSearch = ({ onAddToBookshelf, bookshelf }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
 
@@ -27,7 +28,7 @@ const BookSearch = ({ onAddToBookshelf }) => {
             />
             <div className="book-search-results">
                 {results.map(book => (
-                    <BookCard key={book.key} book={book} onAddToBookshelf={onAddToBookshelf} />
+                    <BookCard key={book.key} book={book} onAddToBookshelf={onAddToBookshelf} bookshelf={bookshelf} />
                 ))}
             </div>
         </div>
@@ -35,3 +36,4 @@ const BookSearch = ({ onAddToBookshelf }) => {
 };
 
 export default BookSearch;
+
