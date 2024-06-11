@@ -12,8 +12,9 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .book-card button {
-    width:6rem;
-    height:3rem;
+    width:auto;
+    height:auto;
+    font-size: 20px;
     border-radius:0.5rem;
     background-color:#4CAF50;
     color:snow;

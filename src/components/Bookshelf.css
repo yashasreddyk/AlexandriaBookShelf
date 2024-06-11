@@ -9,3 +9,7 @@
 .bookshelf .book-card {
     margin: 10px;
 }
+
+.bookshelf button{
+    font-size: 20px;
+}

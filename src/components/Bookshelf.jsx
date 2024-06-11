@@ -14,7 +14,7 @@ const Bookshelf = ({ bookshelf, onRemoveFromBookshelf }) => {
                     <div key={index} className="book-card">
                         <h3>{book.title}</h3>
                         <p>{book.author_name && book.author_name.join(', ')}</p>
-                        <button onClick={() => onRemoveFromBookshelf(book.key)}>Remove from Bookshelf</button>
+                        <button onClick={() => onRemoveFromBookshelf(book.key)}>Remove</button>
                     </div>
                 ))
             ) : (

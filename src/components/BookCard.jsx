@@ -16,7 +16,7 @@ const BookCard = ({ book, onAddToBookshelf, bookshelf }) => {
         <div className="book-card">
             <h3>Book Title: {book.title}</h3>
             <p>Edition Count: {book.edition_count}</p>
-            <button onClick={handleAddToBookshelf}>Add to Bookshelf</button>
+            <button onClick={handleAddToBookshelf}>Add</button>
         </div>
     );
 };
