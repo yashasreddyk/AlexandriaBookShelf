@@ -20,9 +20,10 @@ const HomePage = () => {
     return (
         <div>
             <Navbar />
-            <BookSearch onAddToBookshelf={handleAddToBookshelf} bookshelf={bookshelf}/>
+            <BookSearch onAddToBookshelf={handleAddToBookshelf} bookshelf={bookshelf} />
         </div>
     );
 };
 
 export default HomePage;
+

@@ -1,39 +1,32 @@
-import React, { useState, useEffect} from 'react';
+// src/components/BookSearch.js
+import React, { useState, useCallback } from 'react';
 import axios from 'axios';
+import { debounce } from 'lodash';
 import BookCard from './BookCard';
 import './BookSearch.css';
 
-const BookSearch = ({ onAddToBookshelf }) => {
+const BookSearch = ({ onAddToBookshelf, bookshelf }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
-    const [debouncedQuery, setDebouncedQuery] = useState(query);
 
-    const handleSearch = (e) => {
-        setQuery(e.target.value);
-    };
-
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebouncedQuery(query);
-        }, 500);
-
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [query]);
-
-    useEffect(() => {
-        const fetchBooks = async () => {
-            if (debouncedQuery) {
-                const response = await axios.get(`https://openlibrary.org/search.json?q=${debouncedQuery}&limit=10&page=1`);
+    // Debounced API call
+    const debouncedSearch = useCallback(
+        debounce(async (searchQuery) => {
+            if (searchQuery) {
+                const response = await axios.get(`https://openlibrary.org/search.json?q=${searchQuery}&limit=10&page=1`);
                 setResults(response.data.docs);
             } else {
                 setResults([]);
             }
-        };
+        }, 500), // 500 milliseconds debounce delay
+        []
+    );
 
-        fetchBooks();
-    }, [debouncedQuery]);
+    const handleSearch = (e) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+        debouncedSearch(newQuery);
+    };
 
     return (
         <div className="book-search">
@@ -45,7 +38,7 @@ const BookSearch = ({ onAddToBookshelf }) => {
             />
             <div className="book-search-results">
                 {results.map(book => (
-                    <BookCard key={book.key} book={book} onAddToBookshelf={onAddToBookshelf} />
+                    <BookCard key={book.key} book={book} onAddToBookshelf={onAddToBookshelf} bookshelf={bookshelf} />
                 ))}
             </div>
         </div>
@@ -53,3 +46,4 @@ const BookSearch = ({ onAddToBookshelf }) => {
 };
 
 export default BookSearch;
+
