@@ -1,6 +1,7 @@
 // src/components/BookSearch.js
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import axios from 'axios';
+import { debounce } from 'lodash';
 import BookCard from './BookCard';
 import './BookSearch.css';
 
@@ -8,14 +9,23 @@ const BookSearch = ({ onAddToBookshelf, bookshelf }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
 
-    const handleSearch = async (e) => {
-        setQuery(e.target.value);
-        if (e.target.value) {
-            const response = await axios.get(`https://openlibrary.org/search.json?q=${e.target.value}&limit=10&page=1`);
-            setResults(response.data.docs);
-        } else {
-            setResults([]);
-        }
+    // Debounced API call
+    const debouncedSearch = useCallback(
+        debounce(async (searchQuery) => {
+            if (searchQuery) {
+                const response = await axios.get(`https://openlibrary.org/search.json?q=${searchQuery}&limit=10&page=1`);
+                setResults(response.data.docs);
+            } else {
+                setResults([]);
+            }
+        }, 500), // 500 milliseconds debounce delay
+        []
+    );
+
+    const handleSearch = (e) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+        debouncedSearch(newQuery);
     };
 
     return (
@@ -36,4 +46,3 @@ const BookSearch = ({ onAddToBookshelf, bookshelf }) => {
 };
 
 export default BookSearch;
-

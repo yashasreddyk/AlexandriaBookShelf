@@ -11,10 +11,16 @@ const BookshelfPage = () => {
         setBookshelf(savedBooks);
     }, []);
 
+    const handleRemoveFromBookshelf = (bookKey) => {
+        const updatedBookshelf = bookshelf.filter(book => book.key !== bookKey);
+        setBookshelf(updatedBookshelf);
+        localStorage.setItem('bookshelf', JSON.stringify(updatedBookshelf));
+    };
+
     return (
         <div>
             <Navbar />
-            <Bookshelf bookshelf={bookshelf} />
+            <Bookshelf bookshelf={bookshelf} onRemoveFromBookshelf={handleRemoveFromBookshelf} />
         </div>
     );
 };
