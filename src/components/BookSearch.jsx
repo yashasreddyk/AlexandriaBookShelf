@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import BookCard from './BookCard';
 import './BookSearch.css';
@@ -6,19 +6,34 @@ import './BookSearch.css';
 const BookSearch = ({ onAddToBookshelf }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
+    const [debouncedQuery, setDebouncedQuery] = useState(query);
 
-    const handleSearch = useCallback((e) => {
+    const handleSearch = (e) => {
         setQuery(e.target.value);
-        if (e.target.value) {
-            const fetchBooks = async () => {
-                const response = await axios.get(`https://openlibrary.org/search.json?q=${e.target.value}&limit=10&page=1`);
+    };
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedQuery(query);
+        }, 500);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [query]);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            if (debouncedQuery) {
+                const response = await axios.get(`https://openlibrary.org/search.json?q=${debouncedQuery}&limit=10&page=1`);
                 setResults(response.data.docs);
-            };
-            fetchBooks();
-        } else {
-            setResults([]);
-        }
-    }, []);
+            } else {
+                setResults([]);
+            }
+        };
+
+        fetchBooks();
+    }, [debouncedQuery]);
 
     return (
         <div className="book-search">
@@ -38,4 +53,3 @@ const BookSearch = ({ onAddToBookshelf }) => {
 };
 
 export default BookSearch;
-
