@@ -1,8 +1,9 @@
 // src/components/Bookshelf.js
 import React from 'react';
 import './Bookshelf.css';
+import BookCard from './BookCard';
 
-const Bookshelf = ({ bookshelf }) => {
+const Bookshelf = ({ bookshelf, onRemoveFromBookshelf }) => {
     if (!bookshelf) {
         return <p>Your bookshelf is empty.</p>;
     }
@@ -11,10 +12,13 @@ const Bookshelf = ({ bookshelf }) => {
         <div className="bookshelf">
             {bookshelf.length > 0 ? (
                 bookshelf.map((book, index) => (
-                    <div key={index} className="book-card">
-                        <h3>{book.title}</h3>
-                        <p>{book.author_name && book.author_name.join(', ')}</p>
-                    </div>
+                    <BookCard 
+                        key={index} 
+                        book={book} 
+                        bookshelf={bookshelf} 
+                        onRemoveFromBookshelf={onRemoveFromBookshelf} 
+                        showRemoveButton={true} 
+                    />
                 ))
             ) : (
                 <p>Your bookshelf is empty.</p>
@@ -24,4 +28,5 @@ const Bookshelf = ({ bookshelf }) => {
 };
 
 export default Bookshelf;
+
 

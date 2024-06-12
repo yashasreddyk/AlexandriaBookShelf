@@ -14,7 +14,7 @@ const BookSearch = ({ onAddToBookshelf, bookshelf }) => {
         } else {
             setResults([]);
         }
-    }, 1000)); // 1000 milliseconds debounce delay
+    }, 500)); // 500 milliseconds debounce delay
 
     const handleSearch = (e) => {
         const newQuery = e.target.value;
